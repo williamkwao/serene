@@ -45,20 +45,18 @@ export const metadata: Metadata = {
     siteName: 'Serene Sequel',
     locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.jpg', // You'll need to add this image
-        width: 1200,
-        height: 630,
-        alt: 'Serene Sequel Medical Aesthetics Consulting',
-      },
-    ],
+    images: [{
+      url: '/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Serene Sequel Medical Aesthetics Consulting'
+    }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Serene Sequel | Medical Aesthetics Consulting",
     description: "Expert consulting services for medspas and aesthetic practices. Transform your practice with industry-leading protocols and strategies.",
-    images: ['/twitter-image.jpg'], // You'll need to add this image
+    images: ['/og-image.png'], // You'll need to add this image
   },
   robots: {
     index: true,
