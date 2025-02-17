@@ -13,19 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Serene Sequel | Medical Aesthetics Consulting",
-  description: "Expert medical aesthetics consulting for medspas and aesthetic practices. Specializing in weight loss management, IV therapy, protocols, and business growth strategies.",
+  title: "Serene Sequel | Aesthetic Medicine & MedSpa Consulting",
+  description: "Expert consulting for aesthetic medicine practices, medical spas, and wellness centers. Specializing in clinical protocols, business development, and regulatory compliance.",
   keywords: [
-    "medical aesthetics consulting",
+    "aesthetic medicine consulting",
     "medspa consulting",
-    "aesthetic practice consulting",
-    "weight loss management protocols",
-    "IV hydration therapy",
-    "good faith exams",
-    "medical protocol writing",
-    "medspa business assessment",
+    "medical spa consulting",
+    "aesthetic practice development",
+    "weight loss protocols",
+    "IV therapy consulting",
+    "aesthetic business growth",
+    "medical compliance",
     "aesthetic staff training",
-    "medical practice growth",
+    "practice optimization",
   ],
   authors: [{ name: "Serene Sequel Nursing Consulting Inc." }],
   creator: "Serene Sequel Nursing Consulting Inc.",
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "Serene Sequel | Medical Aesthetics Consulting",
-    description: "Transform your medical aesthetics practice with expert consulting services. Specializing in protocols, training, and business growth strategies.",
+    title: "Serene Sequel | Aesthetic Medicine & MedSpa Consulting",
+    description: "Transform your aesthetic medicine practice with expert consulting services. Comprehensive solutions for medical spas and aesthetic clinics.",
     url: 'https://serenesequel.com',
     siteName: 'Serene Sequel',
     locale: 'en_US',
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Serene Sequel | Medical Aesthetics Consulting",
-    description: "Expert consulting services for medspas and aesthetic practices. Transform your practice with industry-leading protocols and strategies.",
+    title: "Serene Sequel | Aesthetic Medicine & MedSpa Consulting",
+    description: "Expert consulting for aesthetic medicine practices and medical spas. Elevate your practice with industry-leading protocols and strategies.",
     images: ['/og-image.png'], // You'll need to add this image
   },
   robots: {
