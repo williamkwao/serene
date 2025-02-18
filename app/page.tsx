@@ -1,3 +1,5 @@
+'use client';
+import Navigation from './components/Navigation';
 import Image from "next/image";
 import Link from 'next/link';
 import { 
@@ -6,56 +8,14 @@ import {
   ClipboardDocumentCheckIcon,
   DocumentTextIcon,
   ChartBarIcon,
-  UserGroupIcon 
+  UserGroupIcon,
 } from '@heroicons/react/24/outline';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFE8E0] via-white to-[#FFE8E0]">
-      {/* Navigation Header */}
-      <nav className="bg-[#FFE8E0]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-24">
-            <Link href="/" className="flex items-center gap-3 group">
-              <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="16" fill="#7BA7A5"/>
-                <path d="M20 10 C20 8, 16 7, 13 8 C10 9, 9 12, 11 14 C13 16, 19 17, 21 19 C23 21, 22 24, 19 25 C16 26, 12 25, 12 23"
-                      stroke="#FFF5F0" 
-                      fill="none" 
-                      strokeWidth="3"
-                      strokeLinecap="round"/>
-                <path d="M19 6 C21 6, 23 6, 23 8 C23 10, 21 10, 21 11 C21 12, 23 12, 25 12"
-                      stroke="#2B4B4A" 
-                      fill="none" 
-                      strokeWidth="2"
-                      strokeLinecap="round"/>
-              </svg>
-              <span className="text-2xl font-bold text-[#40A99B] group-hover:text-[#368F83] transition-colors">
-                SERENE SEQUEL
-              </span>
-            </Link>
-            
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="#services" className="text-gray-700 hover:text-[#40A99B] transition-colors">Services</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-[#40A99B] transition-colors">Contact</Link>
-              <Link 
-                href="#contact" 
-                className="bg-[#40A99B] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#368F83] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
-              >
-                Book Consultation
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button - You'll need to implement the mobile menu functionality */}
-            <button className="md:hidden p-2 text-gray-700 hover:text-[#40A99B] transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="pt-24 min-h-screen bg-gradient-to-b from-[#FFE8E0] via-white to-[#FFE8E0]">
+      <Navigation />
+      
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header/Hero Section */}
         <header className="pt-32 pb-24 text-center lg:text-left">
