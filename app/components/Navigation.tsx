@@ -2,36 +2,27 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     { href: '#services', label: 'Services' },
-   
+    { href: '#weight-loss', label: 'Weight Loss' },
     { href: '#contact', label: 'Contact Us', isButton: true }
   ];
 
   const Logo = () => (
     <Link href="/" className="flex items-center gap-3 group">
-      <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="16" fill="#7BA7A5"/>
-        <path 
-          d="M20 10 C20 8, 16 7, 13 8 C10 9, 9 12, 11 14 C13 16, 19 17, 21 19 C23 21, 22 24, 19 25 C16 26, 12 25, 12 23"
-          stroke="#FFF5F0" 
-          fill="none" 
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path 
-          d="M19 6 C21 6, 23 6, 23 8 C23 10, 21 10, 21 11 C21 12, 23 12, 25 12"
-          stroke="#2B4B4A" 
-          fill="none" 
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-      <span className="text-2xl font-bold text-[#40A99B] group-hover:text-[#368F83] transition-colors">
+      <Image 
+        src="/s-logo-lavender.svg"
+        alt="Serene Sequel Logo"
+        width={32}
+        height={32}
+        className="group-hover:scale-110 transition-transform duration-300"
+      />
+      <span className="text-2xl font-light tracking-wider text-[#4A4773] group-hover:text-[#7D7ABC] transition-colors">
         SERENE SEQUEL
       </span>
     </Link>
@@ -59,12 +50,26 @@ export default function Navigation() {
       <div 
         className={`
           absolute right-0 top-[88px] w-[300px] h-[calc(100vh-88px)]
-          bg-gradient-to-b from-[#FFE8E0] to-white shadow-xl
+          bg-gradient-to-br from-[#FFE8E0] via-white to-[#FFE8E0]
+          shadow-xl
           transition-transform duration-300 ease-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+          overflow-hidden
+          before:content-['']
+          before:absolute
+          before:inset-0
+          before:bg-[radial-gradient(circle_at_center,#40A99B08_0,transparent_25%)]
+          before:bg-[length:24px_24px]
+          after:content-['']
+          after:absolute
+          after:inset-0
+          after:bg-gradient-to-b
+          after:from-white/50
+          after:to-transparent
+          after:backdrop-blur-[2px]
         `}
       >
-        <div className="p-8 flex flex-col space-y-6">
+        <div className="p-8 flex flex-col space-y-6 relative z-10">
           {navItems.map((item, index) => (
             <Link
               key={item.href}
@@ -97,7 +102,7 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#FFE8E0]">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#F0F0F5]">
         <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-[88px] flex items-center justify-between">
           <Logo />
          
@@ -105,10 +110,9 @@ export default function Navigation() {
         
           <button
             type="button"
-            className="lg:hidden p-2 rounded-lg hover:bg-white/20 transition-colors text-[#40A99B] hover:text-[#368F83]"
+            className="lg:hidden p-2 rounded-lg hover:bg-[#BDB8E3]/20 transition-colors text-[#7D7ABC] hover:text-[#4A4773]"
             onClick={() => {
               setMobileMenuOpen(!mobileMenuOpen)
-              console.log(mobileMenuOpen)
             }}
           >
             {mobileMenuOpen ? (
@@ -126,8 +130,8 @@ export default function Navigation() {
                 href={item.href}
                 className={`
                   ${item.isButton 
-                    ? 'bg-[#40A99B] text-white px-6 py-3 rounded-lg hover:bg-[#368F83] transition-all duration-300'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-[#7D7ABC] text-white px-6 py-3 rounded-lg hover:bg-[#4A4773] transition-all duration-300'
+                    : 'text-gray-600 hover:text-[#4A4773]'
                   }
                 `}
               >

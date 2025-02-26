@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- Circular logo container with solid purple background -->
+  <circle cx="250" cy="250" r="250" fill="#7D7ABC"/>
+  
+  <!-- Centered S with exponent within the circle -->
+  <g transform="translate(250, 250)">
+    <text x="0" y="0" font-family="Helvetica, Arial, sans-serif" font-size="300" font-weight="normal" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">S</text>
+    <text x="120" y="-70" font-family="Helvetica, Arial, sans-serif" font-size="100" font-weight="normal" fill="#FFFFFF" text-anchor="middle" baseline-shift="super">2</text>
+  </g>
+</svg>
