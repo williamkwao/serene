@@ -1,149 +1,126 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
-  const navItems = [
-    { href: '#services', label: 'Services' },
-    { href: '#weight-loss', label: 'Weight Loss' },
-    { href: '#contact', label: 'Contact Us', isButton: true }
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const menuItems = [
+    { href: isHomePage ? "/#services" : "/#services", label: "Services" },
+    { href: isHomePage ? "/#weight-loss" : "/#weight-loss", label: "Weight Loss" },
+    { href: "/consultation", label: "Contact Us", isButton: true }
   ];
 
-  const Logo = () => (
-    <Link href="/" className="flex items-center gap-3 group">
-      <Image 
-        src="/s-logo-lavender.svg"
-        alt="Serene Sequel Logo"
-        width={32}
-        height={32}
-        className="group-hover:scale-110 transition-transform duration-300"
-      />
-      <span className="text-2xl font-light tracking-wider text-[#4A4773] group-hover:text-[#7D7ABC] transition-colors">
-        SERENE SEQUEL
-      </span>
-    </Link>
-  );
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-[#BDB8E3]/20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-24 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-3">
+          <Image
+            src="/s-logo-lavender.svg"
+            alt="Serene Sequel"
+            width={40}
+            height={40}
+          />
+          <span className="text-xl font-medium text-[#4A4773]">
+            SERENE SEQUEL
+          </span>
+        </Link>
 
-  const MobileMenu = () => (
-    <div 
-      className={`
-        fixed inset-0 z-50 lg:hidden
-        transition-all duration-300
-        ${mobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}
-      `}
-    >
-      {/* Backdrop */}
-      <div 
-        className={`
-          absolute inset-0 bg-black/30
-          transition-all duration-300
-          ${mobileMenuOpen ? 'opacity-100' : 'opacity-0'}
-        `}
-        onClick={() => setMobileMenuOpen(false)}
-      />
-      
-      {/* Menu content */}
-      <div 
-        className={`
-          absolute right-0 top-[88px] w-[300px] h-[calc(100vh-88px)]
-          bg-gradient-to-br from-[#FFE8E0] via-white to-[#FFE8E0]
-          shadow-xl
-          transition-transform duration-300 ease-out
-          ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-          overflow-hidden
-          before:content-['']
-          before:absolute
-          before:inset-0
-          before:bg-[radial-gradient(circle_at_center,#40A99B08_0,transparent_25%)]
-          before:bg-[length:24px_24px]
-          after:content-['']
-          after:absolute
-          after:inset-0
-          after:bg-gradient-to-b
-          after:from-white/50
-          after:to-transparent
-          after:backdrop-blur-[2px]
-        `}
-      >
-        <div className="p-8 flex flex-col space-y-6 relative z-10">
-          {navItems.map((item, index) => (
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+          {menuItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                transitionDelay: mobileMenuOpen ? `${150 + index * 75}ms` : '0ms'
-              }}
-              className={`
-                block text-lg font-medium
-                transition-all duration-300
-                transform
-                ${mobileMenuOpen 
-                  ? 'translate-x-0 opacity-100' 
-                  : 'translate-x-8 opacity-0'
-                }
-                ${item.isButton 
-                  ? 'bg-[#40A99B] text-white px-8 py-4 rounded-xl hover:bg-[#368F83] shadow-lg hover:shadow-xl hover:-translate-y-0.5'
-                  : 'text-gray-600 hover:text-gray-900 hover:translate-x-2'
-                }
-              `}
+              className={item.isButton 
+                ? "bg-[#7D7ABC] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#4A4773] transition-all duration-300"
+                : "text-[#4A4773] hover:text-[#7D7ABC] transition-colors"
+              }
             >
               {item.label}
             </Link>
           ))}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-[#4A4773] hover:text-[#7D7ABC] transition-colors"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <XMarkIcon className="w-8 h-8" />
+          ) : (
+            <Bars3Icon className="w-8 h-8" />
+          )}
+        </button>
       </div>
-    </div>
-  );
 
-  return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#F0F0F5]">
-        <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-[88px] flex items-center justify-between">
-          <Logo />
-         
-          {/* Mobile menu button */}
-        
-          <button
-            type="button"
-            className="lg:hidden p-2 rounded-lg hover:bg-[#BDB8E3]/20 transition-colors text-[#7D7ABC] hover:text-[#4A4773]"
-            onClick={() => {
-              setMobileMenuOpen(!mobileMenuOpen)
-            }}
+      {/* Mobile Menu */}
+      <div 
+        className={`
+          fixed inset-0 min-h-screen bg-[#F0F0F5] z-40 md:hidden transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}
+      >
+        <div className="h-24 px-6 flex items-center justify-between border-b border-[#BDB8E3]/20 bg-white">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-3"
+            onClick={() => setIsOpen(false)}
           >
-            {mobileMenuOpen ? (
-              <XMarkIcon className="w-6 h-6" />
-            ) : (
-              <Bars3Icon className="w-6 h-6" />
-            )}
+            <Image
+              src="/s-logo-lavender.svg"
+              alt="Serene Sequel"
+              width={32}
+              height={32}
+            />
+            <span className="text-lg font-medium text-[#4A4773]">
+              SERENE SEQUEL
+            </span>
+          </Link>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-[#4A4773] hover:text-[#7D7ABC] transition-colors p-2 hover:bg-[#F0F0F5] rounded-lg"
+          >
+            <XMarkIcon className="w-6 h-6" />
           </button>
+        </div>
 
-          {/* Desktop menu */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
+        <div className="flex flex-col h-[calc(100vh-6rem)] px-6 py-8">
+          <div className="flex flex-col space-y-6">
+            {menuItems.map((item) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
-                className={`
-                  ${item.isButton 
-                    ? 'bg-[#7D7ABC] text-white px-6 py-3 rounded-lg hover:bg-[#4A4773] transition-all duration-300'
-                    : 'text-gray-600 hover:text-[#4A4773]'
-                  }
-                `}
+                onClick={() => setIsOpen(false)}
+                className={item.isButton 
+                  ? "bg-[#7D7ABC] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#4A4773] text-center transition-all duration-300"
+                  : "text-[#4A4773] hover:text-[#7D7ABC] transition-colors text-lg font-medium"
+                }
               >
                 {item.label}
               </Link>
             ))}
           </div>
-        </nav>
-      </header>
-
-      {/* Mobile menu */}
-      <MobileMenu />
-    </>
+        </div>
+      </div>
+    </nav>
   );
 } 

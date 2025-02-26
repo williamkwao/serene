@@ -4,55 +4,231 @@ import Image from "next/image";
 import Link from 'next/link';
 import { 
   ScaleIcon, 
-  BeakerIcon,
-  ClipboardDocumentCheckIcon,
   DocumentTextIcon,
+  ClipboardDocumentCheckIcon,
+  HeartIcon,
+  PlusIcon,
+  ArrowPathIcon,
   ChartBarIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function Home() {
+  // Create floating animation for background elements
+  const floatingAnimation = {
+    y: [0, -20, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const slowFloating = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const spinAnimation = {
+    rotate: [0, 360],
+    transition: {
+      duration: 20,
+      repeat: Infinity,
+      ease: "linear"
+    }
+  };
+
   return (
-    <div className="pt-24 min-h-screen bg-gradient-to-b from-[#F0F0F5] via-white to-[#F0F0F5]">
+    <div className="min-h-screen bg-gradient-to-b from-[#F0F0F5] via-white to-[#F0F0F5]">
       <Navigation />
       
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient orbs */}
+        <motion.div 
+          className="absolute top-40 left-20 w-72 h-72 bg-[#7D7ABC]/10 rounded-full blur-3xl"
+          animate={floatingAnimation}
+        />
+        <motion.div 
+          className="absolute top-60 right-40 w-96 h-96 bg-[#4A4773]/10 rounded-full blur-3xl"
+          animate={slowFloating}
+        />
+        
+        {/* Medical themed floating elements */}
+        <motion.div 
+          className="absolute top-60 right-1/4 text-[#4A4773]/20"
+          animate={{
+            y: [0, 40, 0],
+            rotate: [0, 360],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <DocumentTextIcon className="w-32 h-32" />
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-40 left-1/3 text-[#BDB8E3]/30"
+          animate={{
+            x: [-20, 20, -20],
+            y: [0, -15, 0],
+            rotate: [0, -180, 0]
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <ClipboardDocumentCheckIcon className="w-20 h-20" />
+        </motion.div>
+
+        {/* Additional decorative elements */}
+        <motion.div 
+          className="absolute top-1/4 right-1/4"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <PlusIcon className="w-16 h-16 text-[#7D7ABC]/20" />
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-1/4 right-1/3"
+          animate={spinAnimation}
+        >
+          <ArrowPathIcon className="w-28 h-28 text-[#4A4773]/10" />
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-32 left-20"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <HeartIcon className="w-24 h-24 text-[#BDB8E3]/20" />
+        </motion.div>
+
+        {/* DNA double helix inspired shape */}
+        <motion.div className="absolute top-1/2 right-20 flex flex-col gap-4">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-4 h-4 rounded-full bg-[#7D7ABC]/20"
+              animate={{
+                x: [0, 20, 0],
+                y: [0, 10, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.2
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header/Hero Section */}
-        <header className="pt-32 pb-24 text-center lg:text-left">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-            <div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-[#4A4773] mb-8 leading-[1.1]">
-                Transform Your Medical Aesthetics Practice
+        <header className="min-h-[calc(100vh-6rem)] flex items-center pt-24 md:pt-0">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center w-full py-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#4A4773] mb-8 leading-[1.1] min-h-[180px]">
+                <TypeAnimation
+                  sequence={[
+                    'Transform Your Medical Aesthetics Practice',
+                    1000,
+                  ]}
+                  speed={50}
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#4A4773]"
+                  repeat={0}
+                />
               </h1>
-              <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+              <motion.p 
+                className="text-lg sm:text-xl text-gray-600 mb-12 leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 2 }}
+              >
                 Expert consulting services for medspas and aesthetic practices. 
                 Elevate your business with industry-leading protocols and growth strategies.
-              </p>
-              <Link
-                href="/consultation"
-                className="inline-flex items-center bg-[#7D7ABC] text-white px-12 py-5 rounded-xl font-medium hover:bg-[#4A4773] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 2.5 }}
               >
-                Schedule a Consultation
-              </Link>
-            </div>
-            <div className="mt-12 lg:mt-0 block">
-              <Image
-                src="/purple-illustration.jpg"
-                alt="Medical Aesthetics Consulting"
-                width={600}
-                height={400}
-                className="rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 w-full"
-                priority
-              />
-            </div>
+                <Link
+                  href="/consultation"
+                  className="inline-flex items-center bg-[#7D7ABC] text-white px-12 py-5 rounded-xl font-medium hover:bg-[#4A4773] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  Schedule a Consultation
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              className="mt-12 lg:mt-0"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.4 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src="/purple-illustration.jpg"
+                  alt="Medical Aesthetics Consulting"
+                  width={600}
+                  height={400}
+                  className="rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 w-full relative z-10"
+                  priority
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </header>
 
         {/* Services Section */}
-        <section className="py-24" id="services">
-          <h2 className="text-4xl font-bold text-center mb-20 text-[#4A4773]">
-            Our Specialized Services
-          </h2>
+        <section id="services" className="py-32 relative">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#4A4773] mb-6">
+              Our Specialized Services
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Comprehensive solutions tailored to elevate your aesthetic medicine practice and ensure compliance with industry standards.
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -63,7 +239,7 @@ export default function Home() {
               {
                 title: "IV Hydration Therapy",
                 description: "Setup and optimization of IV therapy services",
-                icon: BeakerIcon
+                icon: ScaleIcon
               },
               {
                 title: "Good Faith Exams",
@@ -85,17 +261,25 @@ export default function Home() {
                 description: "Professional development and skill enhancement",
                 icon: UserGroupIcon
               }
-            ].map((service, index) => (
-              <div key={index} className="group bg-white/90 backdrop-blur-sm p-10 rounded-2xl shadow-[0_4px_20px_rgba(125,122,188,0.08)] hover:shadow-[0_4px_25px_rgba(125,122,188,0.15)] transition-all duration-300 border border-[#BDB8E3]/20 hover:-translate-y-1">
-                <div className="mb-8">
-                  <service.icon className="h-12 w-12 text-[#7D7ABC] group-hover:scale-110 transition-transform duration-300" />
+            ].map((service) => (
+              <div 
+                key={service.title}
+                className="group bg-white/80 backdrop-blur-xl rounded-2xl p-8 hover:bg-white transition-all duration-500 border border-[#BDB8E3]/20 hover:border-[#7D7ABC]/30 hover:shadow-[0_0_40px_rgba(125,122,188,0.1)] relative overflow-hidden"
+              >
+                {/* Card background decoration */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#7D7ABC]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative">
+                  <div className="w-14 h-14 bg-[#7D7ABC]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <service.icon className="w-7 h-7 text-[#7D7ABC] group-hover:text-[#4A4773] transition-colors duration-500" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-[#4A4773] mb-4 group-hover:translate-x-1 transition-transform duration-500">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-500">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-[#4A4773]">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {service.description}
-                </p>
               </div>
             ))}
           </div>
