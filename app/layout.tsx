@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
     images: [{
-      url: '/og-image.png',
+      url: '/screenshot.png',
       width: 1200,
       height: 630,
       alt: 'Serene Sequel Medical Aesthetics Consulting'
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Serene Sequel | Aesthetic Medicine & MedSpa Consulting",
     description: "Expert consulting for aesthetic medicine practices and medical spas. Elevate your practice with industry-leading protocols and strategies.",
-    images: ['/og-image.png'], // You'll need to add this image
+    images: ['/screenshot.png'], // You'll need to add this image
   },
   robots: {
     index: true,
